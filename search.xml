@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[java线程池初探]]></title>
+      <url>%2F2017%2F04%2F09%2Fjava-thread-pool%2F</url>
+      <content type="text"><![CDATA[newFixedThreadPool简述将创建一个固定长度的线程池，每当提交一个任务就创建一个线程。直到达到线程池的最大数量。这时线程池的规模不在变化（如果有个线程由于发生了未逾期的Exception而结束，那么线程池会补充一个新的线程） 代码demonewCachedThreadPool简述将创建一个可缓存的线程池如果当前线程池超过了处理需求时，那么将回收空闲的线程，而当需求增加时，可以添加新的线程，线程池的规模不受限制 代码demonewSingleThreadPool简述单线程的Executor，它创建单个工作者线程来执行任务，如果这个线程异常结束，会创建另一个线程来替代它。newSingleThreadExecutor能确保依照任务在队列的顺序来串行执行（例如FIFO/LIFO/优先级） 代码demonewSecheduledThreadPool简述创建一个固定长度的线程池，而且以延迟或定时的方式来执行任务，类似于Timer 代码demo12345678910111213141516171819202122232425262728293031323334import java.util.Date;import java.util.concurrent.Executors;import java.util.concurrent.ScheduledExecutorService;import java.util.concurrent.ScheduledFuture;import java.util.concurrent.TimeUnit;public class NewSecheduledThreadPoolDemo &#123; //创建任务执行器 private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1); public void execHour() &#123; //声明要定时执行的任务 final Runnable exec = new Runnable() &#123; public void run() &#123; System.out.println("线程开始执行" + new Date(System.currentTimeMillis())); &#125; &#125;; //开启周期执行任务的计划 final ScheduledFuture&lt;?&gt; execHandle = scheduler.scheduleAtFixedRate(exec, 10, 10, TimeUnit.SECONDS); //开启一个线程用于一小时后取消这个任务 scheduler.schedule(new Runnable() &#123; @Override public void run() &#123; execHandle.cancel(true); &#125; &#125;, 60 * 60, TimeUnit.SECONDS); &#125; public static void main(String[] args) &#123; NewSecheduledThreadPoolDemo demo = new NewSecheduledThreadPoolDemo(); demo.execHour(); &#125;&#125;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Hexo常见问题]]></title>
       <url>%2F2017%2F04%2F03%2FHexoProblem%2F</url>
       <content type="text"><![CDATA[一、写文章出现横向滚动条的问题 写文章时，每行写的文字比较长，出现了横线滚动条 目前的解决办法，在文章开头添加’&lt;\blockquote class=”blockquote-center”&gt;’标签。]]></content>
