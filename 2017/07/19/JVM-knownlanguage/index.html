@@ -87,22 +87,29 @@
 
 
 
-<meta name="description" content="常常看见spring的AOP是由动态代理实现的，最近准备面试，将这些知识点一起整理下
-代理通用实例类1234public interface Person &amp;#123;&amp;#125;
-123456789101112public class Student implements Person&amp;#123;	private static Student student=null;	public  stat">
+<meta name="description" content="jvm总体梳理类加载机制类的生命周期
+1、加载：查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象2、验证：文件格式、元数据、字节码、符号引用验证3、准备：为类的静态变量分配内存，并将其初始化为默认值4、解析：把类中的符号引用转换为直接引用5、初始化：为类的静态变量赋予正确的初始值6、使用：new出正确的对象在从程序中使用7、卸载：执行垃圾回收
+类加载器
+1、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dynamic-proxy-and-static-proxy">
-<meta property="og:url" content="http://yoursite.com/2017/07/17/Dynamic-proxy-and-static-proxy/index.html">
+<meta property="og:title" content="JVM-knownlanguage">
+<meta property="og:url" content="http://yoursite.com/2017/07/19/JVM-knownlanguage/index.html">
 <meta property="og:site_name" content="FlyingFish'Note">
-<meta property="og:description" content="常常看见spring的AOP是由动态代理实现的，最近准备面试，将这些知识点一起整理下
-代理通用实例类1234public interface Person &amp;#123;&amp;#125;
-123456789101112public class Student implements Person&amp;#123;	private static Student student=null;	public  stat">
-<meta property="og:updated_time" content="2017-07-19T01:18:53.705Z">
+<meta property="og:description" content="jvm总体梳理类加载机制类的生命周期
+1、加载：查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象2、验证：文件格式、元数据、字节码、符号引用验证3、准备：为类的静态变量分配内存，并将其初始化为默认值4、解析：把类中的符号引用转换为直接引用5、初始化：为类的静态变量赋予正确的初始值6、使用：new出正确的对象在从程序中使用7、卸载：执行垃圾回收
+类加载器
+1、">
+<meta property="og:image" content="http://yoursite.com/image/JVM-knownlanguage/2fb054008ca2898e0a17f7d79ce525a1.png">
+<meta property="og:image" content="http://yoursite.com/image/JVM-knownlanguage/calssloader.png">
+<meta property="og:image" content="http://yoursite.com/image/JVM-knownlanguage/structure.png">
+<meta property="og:updated_time" content="2017-07-19T02:50:06.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dynamic-proxy-and-static-proxy">
-<meta name="twitter:description" content="常常看见spring的AOP是由动态代理实现的，最近准备面试，将这些知识点一起整理下
-代理通用实例类1234public interface Person &amp;#123;&amp;#125;
-123456789101112public class Student implements Person&amp;#123;	private static Student student=null;	public  stat">
+<meta name="twitter:title" content="JVM-knownlanguage">
+<meta name="twitter:description" content="jvm总体梳理类加载机制类的生命周期
+1、加载：查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象2、验证：文件格式、元数据、字节码、符号引用验证3、准备：为类的静态变量分配内存，并将其初始化为默认值4、解析：把类中的符号引用转换为直接引用5、初始化：为类的静态变量赋予正确的初始值6、使用：new出正确的对象在从程序中使用7、卸载：执行垃圾回收
+类加载器
+1、">
+<meta name="twitter:image" content="http://yoursite.com/image/JVM-knownlanguage/2fb054008ca2898e0a17f7d79ce525a1.png">
 
 
 
@@ -130,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/17/Dynamic-proxy-and-static-proxy/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/19/JVM-knownlanguage/"/>
 
 
 
 
 
-  <title> Dynamic-proxy-and-static-proxy | FlyingFish'Note </title>
+  <title> JVM-knownlanguage | FlyingFish'Note </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -309,7 +316,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/Dynamic-proxy-and-static-proxy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/JVM-knownlanguage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyingFish">
@@ -330,7 +337,7 @@
             
             
               
-                Dynamic-proxy-and-static-proxy
+                JVM-knownlanguage
               
             
           </h1>
@@ -345,8 +352,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T09:42:17+08:00">
-                2017-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-19T09:25:31+08:00">
+                2017-07-19
               </time>
             
 
@@ -381,13 +388,20 @@
       
 
       
-        <p><blockquote class="blockquote-center">常常看见spring的AOP是由动态代理实现的，最近准备面试，将这些知识点一起整理下</blockquote></p>
-<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="通用实例类"><a href="#通用实例类" class="headerlink" title="通用实例类"></a>通用实例类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Person</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Student student=<span class="keyword">null</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> Student <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(student==<span class="keyword">null</span>)</div><div class="line">			student=<span class="keyword">new</span> Student();</div><div class="line">		<span class="keyword">return</span> student;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"我是一个学生"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">implements</span> <span class="title">Person</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Teacher teacher=<span class="keyword">null</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Teacher <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(teacher==<span class="keyword">null</span>)&#123;</div><div class="line">			teacher=<span class="keyword">new</span> Teacher();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> teacher;</div><div class="line">	&#125;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">()</span></span>&#123;</div><div class="line">	 System.out.println(<span class="string">"我是一个老师"</span>);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticPorxy</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Teacher <span class="title">getTeacher</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> Teacher.getInstance();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Student <span class="title">getStudent</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> Student.getInstance();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</div><div class="line"><span class="keyword">import</span> java.lang.reflect.Method;</div><div class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</div><div class="line">	<span class="keyword">public</span> Object targetObject;</div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">newProxyInstance</span><span class="params">(Object targetObject)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.targetObject=targetObject;</div><div class="line">		<span class="comment">//该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例</span></div><div class="line">		<span class="comment">//	第一个参数指定产生代理对象的类加载器，需要将其指定为和目标对象同一个类加载器</span></div><div class="line">		<span class="comment">//第二个参数要实现和目标对象一样的接口，所以只需要拿到目标对象的实现接口</span></div><div class="line">		<span class="comment">//第三个参数表明这些被拦截的方法在被拦截时需要执行哪个InvocationHandler的invoke方法</span></div><div class="line">		<span class="comment">//根据传入的目标返回一个代理对象</span></div><div class="line">		<span class="keyword">return</span> Proxy.newProxyInstance(targetObject.getClass().getClassLoader(),</div><div class="line">				targetObject.getClass().getInterfaces(),<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		</div><div class="line">		<span class="keyword">return</span> method.invoke(proxy, args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="测试类"><a href="#测试类" class="headerlink" title="测试类"></a>测试类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMain</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">	<span class="comment">//静态调用</span></div><div class="line"><span class="comment">//	StaticPerson.getStudent();</span></div><div class="line"><span class="comment">//	StaticPerson.getTeacher();</span></div><div class="line">	<span class="comment">//动态调用</span></div><div class="line">	DynamicProxy proxy=<span class="keyword">new</span> DynamicProxy();</div><div class="line">	Person student=(Person) proxy.newProxyInstance(<span class="keyword">new</span> Student());</div><div class="line">	Person teacher=(Person) proxy.newProxyInstance(<span class="keyword">new</span> Teacher());</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="jvm总体梳理"><a href="#jvm总体梳理" class="headerlink" title="jvm总体梳理"></a>jvm总体梳理</h2><h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><h4 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h4><span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="/image/JVM-knownlanguage/2fb054008ca2898e0a17f7d79ce525a1.png" class="full-image" alt="alt" title="类加载过程"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>
+<p>1、加载：查找并加载类的二进制数据，在Java堆中也创建一个java.lang.Class类的对象<br>2、验证：文件格式、元数据、字节码、符号引用验证<br>3、准备：为类的静态变量分配内存，并将其初始化为默认值<br>4、解析：把类中的符号引用转换为直接引用<br>5、初始化：为类的静态变量赋予正确的初始值<br>6、使用：new出正确的对象在从程序中使用<br>7、卸载：执行垃圾回收</p>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="/image/JVM-knownlanguage/calssloader.png" class="full-image" alt="alt" title="类加载器"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>
+<p>1、启动类加载器<br>2、扩展类加载器<br>3、应用类加载器</p>
+<h4 id="类加载机制-1"><a href="#类加载机制-1" class="headerlink" title="类加载机制"></a>类加载机制</h4><p>1、全盘负责<br>2、父类委托<br>3、缓存机制</p>
+<h3 id="jvm内存结构"><a href="#jvm内存结构" class="headerlink" title="jvm内存结构"></a>jvm内存结构</h3><span itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject"><img itemprop="url image" src="/image/JVM-knownlanguage/structure.png" class="full-image" alt="alt" title="JVM内存模型"><meta itemprop="width" content="auto"><meta itemprop="height" content="auto"></span>
+<p>1、Java堆（Heap）,是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。<br>2、方法区（Method Area）,方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。<br>3、程序计数器（Program Counter Register）,程序计数器（Program Counter Register）是一块较小的内存空间，它的作用可以看做是当前线程所执行的字节码的行号指示器。<br>4、JVM栈（JVM Stacks）,与程序计数器一样，Java虚拟机栈（Java Virtual Machine Stacks）也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame）用于存储局部变量表、操作栈、动态链接、方法出口等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。<br>5、本地方法栈（Native Method Stacks）,本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则是为虚拟机使用到的Native方法服务。</p>
+<h3 id="对象分配规则"><a href="#对象分配规则" class="headerlink" title="对象分配规则"></a>对象分配规则</h3><p>1、对象优先分配在Eden区，如果Eden区没有足够的空间时，虚拟机执行一次Minor GC。<br>2、大对象直接进入老年代（大对象是指需要大量连续内存空间的对象）。这样做的目的是避免在Eden区和两个Survivor区之间发生大量的内存拷贝（新生代采用复制算法收集内存）。<br>3、长期存活的对象进入老年代。虚拟机为每个对象定义了一个年龄计数器，如果对象经过了1次Minor GC那么对象会进入Survivor区，之后每经过一次Minor GC那么对象的年龄加1，知道达到阀值对象进入老年区。<br>4、动态判断对象的年龄。如果Survivor区中相同年龄的所有对象大小的总和大于Survivor空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。<br>5、空间分配担保。每次进行Minor GC时，JVM会计算Survivor区移至老年区的对象的平均大小，如果这个值大于老年区的剩余值大小则进行一次Full GC，如果小于检查HandlePromotionFailure设置，如果true则只进行Monitor GC,如果false则进行Full GC。</p>
+<h3 id="GC算法-垃圾回收"><a href="#GC算法-垃圾回收" class="headerlink" title="GC算法 垃圾回收"></a>GC算法 垃圾回收</h3><h4 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h4><p>1、引用计数算法<br>2、对象不可达算法</p>
+<h4 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h4><p>1、标记-清除算法<br>2、标记-压缩算法<br>3、复制算法<br>4、分代手机算法</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><p>1、Serial收集器，串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。<br>2、ParNew收集器，ParNew收集器其实就是Serial收集器的多线程版本。<br>3、Parallel收集器，Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。<br>4、Parallel Old 收集器，Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法<br>5、CMS收集器，CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。<br>6、G1收集器，G1 (Garbage-First)是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足GC停顿时间要求的同时,还具备高吞吐量性能特征</p>
+<h3 id="GC分析-命令调优"><a href="#GC分析-命令调优" class="headerlink" title="GC分析 命令调优"></a>GC分析 命令调优</h3><h4 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h4><h4 id="调优命令"><a href="#调优命令" class="headerlink" title="调优命令"></a>调优命令</h4><p>1、jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。<br>2、jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。<br>3、jmap，JVM Memory Map命令用于生成heap dump文件<br>4、jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看<br>5、jstack，用于生成java虚拟机当前时刻的线程快照。<br>6、jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</p>
+<h4 id="调优工具"><a href="#调优工具" class="headerlink" title="调优工具"></a>调优工具</h4><p>1、jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控<br>2、jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。<br>3、MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗<br>4、GChisto，一款专业分析gc日志的工具</p>
+
       
     </div>
 
@@ -429,8 +443,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/17/linux-popular-command/" rel="next" title="linux常用命令大全">
-                <i class="fa fa-chevron-left"></i> linux常用命令大全
+              <a href="/2017/07/17/Dynamic-proxy-and-static-proxy/" rel="next" title="Dynamic-proxy-and-static-proxy">
+                <i class="fa fa-chevron-left"></i> Dynamic-proxy-and-static-proxy
               </a>
             
           </div>
@@ -439,8 +453,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/19/JVM-knownlanguage/" rel="prev" title="JVM-knownlanguage">
-                JVM-knownlanguage <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/19/http-request-response/" rel="prev" title="http-request-response">
+                http-request-response <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -570,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代理"><span class="nav-number">1.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用实例类"><span class="nav-number">1.1.</span> <span class="nav-text">通用实例类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态代理"><span class="nav-number">1.2.</span> <span class="nav-text">静态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理"><span class="nav-number">1.3.</span> <span class="nav-text">动态代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试类"><span class="nav-number">2.</span> <span class="nav-text">测试类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jvm总体梳理"><span class="nav-number">1.</span> <span class="nav-text">jvm总体梳理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载机制"><span class="nav-number">1.1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类的生命周期"><span class="nav-number">1.1.1.</span> <span class="nav-text">类的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载器"><span class="nav-number">1.1.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载机制-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">类加载机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jvm内存结构"><span class="nav-number">1.2.</span> <span class="nav-text">jvm内存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象分配规则"><span class="nav-number">1.3.</span> <span class="nav-text">对象分配规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC算法-垃圾回收"><span class="nav-number">1.4.</span> <span class="nav-text">GC算法 垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象存活判断"><span class="nav-number">1.4.1.</span> <span class="nav-text">对象存活判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GC算法"><span class="nav-number">1.4.2.</span> <span class="nav-text">GC算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">1.4.3.</span> <span class="nav-text">垃圾回收器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC分析-命令调优"><span class="nav-number">1.5.</span> <span class="nav-text">GC分析 命令调优</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GC日志分析"><span class="nav-number">1.5.1.</span> <span class="nav-text">GC日志分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调优命令"><span class="nav-number">1.5.2.</span> <span class="nav-text">调优命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调优工具"><span class="nav-number">1.5.3.</span> <span class="nav-text">调优工具</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
